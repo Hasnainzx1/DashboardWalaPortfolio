@@ -29,6 +29,34 @@ const Project = () => {
         "Scalable architecture with Next.js & TypeScript"
       ]
     },
+    {
+      id: 2,
+      title: "Full Stack Job Finder Application",
+      description: "Search, Post, Apply For Job Next js and Typescript with Firebase",
+      fullDescription: "A comprehensive job finder application to help users discover and apply for new opportunities. The app provides a user-friendly interface to browse job listings and manage applications.",
+      technologies: ["Next JS", "Typescript", "Gemini Api", "Tailwind CSS", "MUI"],
+      images: [
+        "/Images/login.png",
+        "/Images/Mainjob.png",
+        "/Images/review.png",
+        "/Images/Post.png",
+      ],
+      githubLink: "https://github.com/Hasnainzx1/HireHunar",
+      liveDemoLink: "https://hire-hunar.vercel.app/auth",
+      features: [
+        "User authentication and secure session management",
+        "Employer & Job Seeker dashboards with role-based access",
+        "Post and manage job listings in the IT sector",
+        "Search and filter jobs by title, location, skills, and experience",
+        "Real-time notifications for new job postings",
+        "Apply for jobs with resume upload and profile integration",
+        "Responsive design for web and mobile devices",
+        "Full-stack architecture with Next.js, Node.js, MongoDB, and Tailwind CSS",
+        "Admin panel for managing users, jobs, and platform content",
+        "Optimized performance and deployment on Vercel"
+      ]
+
+    },
   ];
 
   const openProjectDetail = (project) => setSelectedProject(project);
