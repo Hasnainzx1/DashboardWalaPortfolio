@@ -10,7 +10,7 @@ const About = () => {
         <img
           src="/Images/User2.jpeg"
           alt="ahk"
-          className="w-30 h-30 rounded-full mx-auto mb-4 border-4 border-white shadow-lg"
+          className="w-25 h-25 rounded-full mx-auto mb-4 border-4 border-white shadow-lg"
         />
         <h1 className="text-3xl font-bold text-gray-900">Ali Huzaifa </h1>
         <p className="text-gray-600">Full/Mern Stack Developer | React Specialist</p>
@@ -92,7 +92,7 @@ const About = () => {
 
       {/* Footer */}
       <footer className="text-center text-gray-500 py-8 text-sm mt-8">
-        © 2025 Abdullah Chauhan. All Rights Reserved.
+        © 2025 Ali Huzaifa. All Rights Reserved.
       </footer>
     </div>
   );
