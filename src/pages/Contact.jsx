@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { FaUser, FaEnvelope, FaPaperPlane, FaMapMarkerAlt, FaPhone, FaLinkedin, FaGithub } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaUser, FaEnvelope, FaPaperPlane, FaMapMarkerAlt, FaPhone, FaLinkedin, FaGithub, FaSpinner } from "react-icons/fa";
 
 const Contact = () => {
+  // State for form data
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -9,8 +10,21 @@ const Contact = () => {
     message: ""
   });
 
+  // State for form submission status
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // State for initial component loading (NEWLY ADDED)
+  const [isLoading, setIsLoading] = useState(true); 
+
+  // Effect to simulate initial data fetching/loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2-second initial loading delay
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -52,6 +66,17 @@ const Contact = () => {
     }
   ];
 
+  // --- Start of Initial Loading Screen Logic ---
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-white">
+        <FaSpinner className="text-4xl text-black animate-spin" />
+        <span className="ml-3 text-xl font-medium text-black">Loading Contact Information...</span>
+      </div>
+    );
+  }
+  // --- End of Initial Loading Screen Logic ---
+
   return (
     <div className="p-8 bg-white min-h-screen">
       <div className="max-w-6xl mx-auto">
@@ -83,20 +108,25 @@ const Contact = () => {
                 ))}
               </div>
 
-              {/* Social Links */}
+              
               <div className="mt-8">
                 <h4 className="text-lg font-bold text-black mb-4">Follow Me</h4>
                 <div className="flex space-x-4">
                   <a target="_blank" href="https://www.linkedin.com/in/ali-huzaifa-92137a292/" className="p-3 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 transition-colors">
                     <FaLinkedin className="text-gray-700" />
                   </a>
-               
+                  {/* I recommend adding a link for FaGithub if you have one! */}
+                  {/*
+                  <a target="_blank" href="YOUR_GITHUB_LINK" className="p-3 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 transition-colors">
+                    <FaGithub className="text-gray-700" />
+                  </a>
+                  */}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
+        
           <div className="lg:col-span-2">
             <div className="bg-white border border-gray-200 rounded-lg p-6">
               <h3 className="text-xl font-bold text-black mb-6">Send Message</h3>
@@ -214,8 +244,6 @@ const Contact = () => {
               <h4 className="font-bold text-black mb-2">Response Time</h4>
               <p className="text-gray-600">Within 24 hours</p>
             </div>
-           
-           
           </div>
         </div>
       </div>

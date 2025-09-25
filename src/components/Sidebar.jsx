@@ -9,7 +9,8 @@ import {
   FaBriefcase,
   FaPalette,
   FaTimes,
-  FaBars
+  FaBars,
+  FaTools
 } from "react-icons/fa";
 
 export default function Sidebar() {
@@ -31,7 +32,9 @@ export default function Sidebar() {
     { to: "/about", icon: FaUser, text: "About Me" },
     { to: "/projects", icon: FaProjectDiagram, text: "My Projects" },
     { to: "/experience", icon: FaBriefcase, text: "Experience" },
+     { to: "/skills", icon: FaTools, text: "Skills" }, 
     { to: "/contact", icon: FaEnvelope, text: "Contact Me" }
+
   ];
 
   return (
@@ -91,7 +94,7 @@ export default function Sidebar() {
           ))}
         </nav>
 
-        {/* Footer */}
+       
         <div className="p-6 border-t border-gray-100">
           <div className="text-center text-gray-400 text-xs">
             <p>© 2024 MyArtfolio</p>
@@ -99,12 +102,12 @@ export default function Sidebar() {
         </div>
       </aside>
 
-      {/* Main Content Shift for Mobile */}
+    
       <div className={`
         lg:ml-0 transition-all duration-300
         ${isOpen ? 'ml-72' : 'ml-0'}
       `}>
-        {/* Your main content will go here */}
+       
       </div>
     </>
   );
