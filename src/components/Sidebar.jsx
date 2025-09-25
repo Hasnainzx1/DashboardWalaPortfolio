@@ -97,7 +97,7 @@ export default function Sidebar() {
        
         <div className="p-6 border-t border-gray-100">
           <div className="text-center text-gray-400 text-xs">
-            <p>© 2024 MyArtfolio</p>
+            <p>© 2025 Portfolio</p>
           </div>
         </div>
       </aside>

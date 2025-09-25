@@ -1,56 +1,88 @@
 import React, { useState, useEffect } from "react";
-import { FaMapMarkerAlt, FaGraduationCap, FaCertificate, FaSpinner } from "react-icons/fa";
+import { FaMapMarkerAlt, FaGraduationCap, FaCertificate } from "react-icons/fa"; // FaSpinner is no longer needed
 
 const About = () => {
-  // State for initial component loading
-  const [isLoading, setIsLoading] = useState(true); 
+  // State to control the visibility and progress of the horizontal loading bar
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
-  // Effect to simulate initial data fetching/loading
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // 2-second initial loading delay
+    // 1. Start the progress immediately (simulating data fetch start)
+    setLoadingProgress(30);
 
-    return () => clearTimeout(timer);
-  }, []);
+    // 2. Set the progress to 80% after 200ms
+    const progressTimer1 = setTimeout(() => {
+      setLoadingProgress(80);
+    }, 200);
 
-  // --- Start of Initial Loading Screen Logic ---
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-50">
-        <FaSpinner className="text-4xl text-gray-900 animate-spin" />
-        <span className="ml-3 text-xl font-medium text-gray-900">Loading Profile...</span>
-      </div>
-    );
-  }
-  // --- End of Initial Loading Screen Logic ---
+    // 3. Set a timeout for the full 1-second simulated load time
+    const loadTimer = setTimeout(() => {
+      // 4. Complete the progress bar (100%) and then hide it
+      setLoadingProgress(100);
+      setTimeout(() => setLoadingProgress(0), 300); // Wait 300ms for the animation to finish
+    }, 1000); // Total simulated load time: 1 second
+
+    // Cleanup function: Clear all timeouts if the component unmounts early
+    return () => {
+      clearTimeout(progressTimer1);
+      clearTimeout(loadTimer);
+    };
+  }, []); // Empty dependency array means this runs only once on mount
+
+  // Check if data is actively loading (0 < progress < 100)
+  const isActivelyLoading = loadingProgress > 0 && loadingProgress < 100;
+
+  // --- Removed the old Full-Screen Spinner Logic ---
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-gray-50 text-gray-900 custom-scrollbar p-4 sm:p-6"> {/* Adjusted padding for smaller screens */}
+    <div className="w-full h-full overflow-y-auto bg-gray-50 text-gray-900 custom-scrollbar p-4 sm:p-6">
+
+      {/* --- Horizontal Loading Bar (ADDED FROM HOME) --- */}
+      {isActivelyLoading && (
+        <div 
+          style={{ width: `${loadingProgress}%` }} 
+          className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out shadow-lg shadow-black/50" 
+        />
+      )}
+      {loadingProgress === 100 && (
+          <div 
+          style={{ width: '100%' }} 
+          className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out opacity-0" 
+        />
+      )}
+      {/* ------------------------------------------- */}
 
       {/* Header Section */}
-      <div className="text-center mb-6 sm:mb-8"> {/* Adjusted margin for smaller screens */}
-        <img
-          src="/Images/User2.jpeg"
-          alt="ahk"
-          // Enhanced image responsiveness: w-24/h-24 on mobile, scales up on larger screens
-          className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow-lg" 
-        />
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Ali Huzaifa </h1> {/* Adjusted text size */}
-        <p className="text-sm sm:text-base text-gray-600">Full/Mern Stack Developer | React Specialist</p> {/* Adjusted text size */}
+      <div className="text-center mb-6 sm:mb-8">
+        
+        {/* --- IMAGE / SKELETON LOADER LOGIC --- */}
+        {isActivelyLoading ? (
+          // Skeleton Loader: w-24/h-24 on mobile, scales up on larger screens
+          <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-lg bg-gray-300 animate-pulse" />
+        ) : (
+          // Actual Image after loading is complete
+          <img
+            src="/Images/User2.jpeg"
+            alt="ahk"
+            className="w-24 h-24 sm:w-32 sm:h-32 object-contain rounded-full mx-auto mb-4 border-4 border-white shadow-lg" 
+          />
+        )}
+        {/* ------------------------------------ */}
+
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Ali Huzaifa </h1>
+        <p className="text-sm sm:text-base text-gray-600">Full/Mern Stack Developer | React Specialist</p>
         <div className="flex items-center justify-center gap-2 mt-2">
           <FaMapMarkerAlt className="text-gray-500 text-sm sm:text-base" />
-          <span className="text-sm sm:text-base text-gray-600">Karāchi, Sindh, Pakistan</span> {/* Adjusted text size */}
+          <span className="text-sm sm:text-base text-gray-600">Karāchi, Sindh, Pakistan</span>
         </div>
       </div>
 
       {/* About Content */}
-      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8"> {/* Adjusted spacing */}
+      <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
 
         {/* Main About Section */}
-        <div className="bg-white p-5 sm:p-6 rounded-lg shadow-md"> {/* Adjusted padding and shadow */}
+        <div className="bg-white p-5 sm:p-6 rounded-lg shadow-md">
           <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4">About Me</h2>
-          <div className="space-y-4 text-gray-700 leading-relaxed text-sm sm:text-base"> {/* Adjusted text size */}
+          <div className="space-y-4 text-gray-700 leading-relaxed text-sm sm:text-base">
             <p className="text-gray-700">
               I’m Ali Huzaifa, a passionate Front-End Developer with over **2 years of experience** building modern, responsive web applications. I specialize in **React.js, Next.js, Tailwind CSS, and Material UI**, delivering clean, interactive, and user-friendly interfaces. Throughout my career, I have collaborated with clients from UAE, Germany, and Bangladesh, helping them transform ideas into real-world web solutions with a strong focus on usability and aesthetics.
             </p>
@@ -103,7 +135,7 @@ const About = () => {
       </div>
 
       {/* Footer */}
-      <footer className="text-center text-gray-500 py-6 sm:py-8 text-xs sm:text-sm mt-6 sm:mt-8"> {/* Adjusted padding and text size */}
+      <footer className="text-center text-gray-500 py-6 sm:py-8 text-xs sm:text-sm mt-6 sm:mt-8">
         © 2025 Ali Huzaifa. All Rights Reserved.
       </footer>
     </div>
