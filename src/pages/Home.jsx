@@ -87,7 +87,7 @@ const Home = ({ darkMode }) => {
         {/* Download Resume Button */}
         <div className="mt-4 md:mt-0 w-full md:w-auto flex justify-center md:justify-end">
           <a
-            href="/CBV-React.pdf" 
+            href="/CV.pdf" 
             download 
             className={`flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2 rounded shadow-md border text-sm sm:text-base w-full md:w-auto transition-colors duration-200 ${buttonDarkBg}`}
           >
