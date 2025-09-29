@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaDownload, FaBriefcase, FaProjectDiagram } from "react-icons/fa";
 
-const Home = () => {
+// Component now accepts darkMode state as a prop
+const Home = ({ darkMode }) => {
   // State to control the visibility and progress of the horizontal loading bar
   const [loadingProgress, setLoadingProgress] = useState(0);
 
@@ -29,20 +30,30 @@ const Home = () => {
     };
   }, []);
 
-  return (
-    <div className="w-full h-full overflow-y-auto bg-white text-gray-900 custom-scrollbar">
+  // Define dynamic classes based on darkMode state
+  const textColor = darkMode ? 'text-white' : 'text-gray-900';
+  const bgColor = darkMode ? 'bg-gray-900' : 'bg-white';
+  const shadowColor = darkMode ? 'shadow-white/20' : 'shadow-black/50';
+  const cardBg = darkMode ? 'bg-gray-800' : 'bg-gray-50';
+  const textSecondary = darkMode ? 'text-gray-400' : 'text-gray-600';
+  const buttonDarkBg = darkMode ? 'bg-gray-700 hover:bg-gray-600 text-white border-white' : 'bg-white hover:bg-gray-200 text-black border-black';
+  const linkHover = darkMode ? 'text-yellow-400 hover:underline' : 'text-teal-600 hover:underline';
 
-      {/* --- Horizontal Loading Bar (NEWLY ADDED) --- */}
+  return (
+    <div className={`w-full h-full overflow-y-auto custom-scrollbar ${bgColor} ${textColor}`}>
+
+      {/* --- Horizontal Loading Bar --- */}
       {loadingProgress > 0 && loadingProgress < 100 && (
         <div 
           style={{ width: `${loadingProgress}%` }} 
-          className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out shadow-lg shadow-black/50" 
+          // Color is fixed (e.g., black) but could be dynamic too
+          className={`fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out shadow-lg ${shadowColor}`} 
         />
       )}
       {loadingProgress === 100 && (
-          <div 
+        <div 
           style={{ width: '100%' }} 
-          className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out opacity-0" 
+          className={`fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out opacity-0`} 
         />
       )}
       {/* ------------------------------------------- */}
@@ -65,18 +76,20 @@ const Home = () => {
             className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-4 border-white shadow-md"
           />
           <div className="text-center sm:text-left">
+            {/* Name with contrasting background */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 md:mb-2 text-white bg-black/70 px-2 py-1 rounded-md inline-block">Ali Huzaifa Karimi</h1>
-            <p className="text-gray-600 text-sm sm:text-base mt-2">
+            <p className={`text-sm sm:text-base mt-2 ${textSecondary}`}>
               Full/Mern Stack Developer | React Specialist
             </p>
           </div>
         </div>
 
+        {/* Download Resume Button */}
         <div className="mt-4 md:mt-0 w-full md:w-auto flex justify-center md:justify-end">
           <a
             href="/CBV-React.pdf" 
             download 
-            className="flex items-center justify-center gap-2 bg-white hover:bg-gray-200 text-black px-4 py-2 sm:px-5 sm:py-2 rounded shadow-md border border-black text-sm sm:text-base w-full md:w-auto"
+            className={`flex items-center justify-center gap-2 px-4 py-2 sm:px-5 sm:py-2 rounded shadow-md border text-sm sm:text-base w-full md:w-auto transition-colors duration-200 ${buttonDarkBg}`}
           >
             Download Resume <FaDownload />
           </a>
@@ -88,38 +101,38 @@ const Home = () => {
 
         {/* Left Column - About Me & Work Experience */}
         <div className="md:col-span-2 space-y-4 md:space-y-6">
-          <h2 className="text-xl font-semibold text-gray-900">About me</h2>
-          <p className="text-gray-700 text-sm sm:text-base">
+          <h2 className={`text-xl font-semibold ${textColor}`}>About me</h2>
+          <p className={`${textSecondary} text-sm sm:text-base`}>
             I'm Ali Huzaifa, a passionate Front-End Developer with over <strong>2 years of experience</strong> creating modern, responsive web applications. I specialize in <strong>React.js, Next.js, Tailwind CSS, and Material UI</strong>, and have collaborated with clients from UAE, Germany, and Bangladesh. Beyond development, I have a keen eye for UI/UX design and graphics, with experience in Photoshop, Illustrator, and LRN-certified design skills.
           </p>
-          <p className="text-gray-700 text-sm sm:text-base">
+          <p className={`${textSecondary} text-sm sm:text-base`}>
             I enjoy bringing interfaces to life using <strong>GSAP, Framer Motion</strong>, and have a basic knowledge of <strong>Three.js</strong> for interactive designs. Always eager to learn, I'm open to remote opportunities and love working in tech-driven, collaborative teams.
           </p>
 
-          <Link to="/about" className="text-gray-800 font-medium inline-block text-sm sm:text-base">
+          <Link to="/about" className={`${textColor} font-medium inline-block text-sm sm:text-base`}>
             Read more...
           </Link>
 
           {/* Work Experience */}
           <div className="mt-6">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 gap-2">
-              <h3 className="text-lg font-semibold text-gray-900">
+              <h3 className={`text-lg font-semibold ${textColor}`}>
                 Work Experience
               </h3>
               <Link
                 to="/experience"
-                className="text-sm text-teal-600 hover:underline"
+                className={`text-sm ${linkHover}`}
               >
                 Other Experiences
               </Link>
             </div>
 
-            <div className="flex items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 shadow rounded">
-              <FaBriefcase className="text-black text-xl sm:text-2xl mt-1 sm:mt-0 flex-shrink-0" />
+            <div className={`flex items-start sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 shadow rounded ${cardBg}`}>
+              <FaBriefcase className={`text-xl sm:text-2xl mt-1 sm:mt-0 flex-shrink-0 ${darkMode ? 'text-yellow-400' : 'text-black'}`} />
               <div>
-                <p className="font-medium text-sm sm:text-base">Frontend Developer</p>
-                <p className="text-gray-600 text-sm">ITG Technologies</p>
-                <p className="text-gray-500 text-xs sm:text-sm">July 2025 – Present</p>
+                <p className={`font-medium text-sm sm:text-base ${textColor}`}>Frontend Developer</p>
+                <p className={`${textSecondary} text-sm`}>ITG Technologies</p>
+                <p className={`${textSecondary} text-xs sm:text-sm`}>July 2025 – Present</p>
               </div>
             </div>
           </div>
@@ -130,7 +143,7 @@ const Home = () => {
 
           {/* Skills Section */}
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">My Skills</h3>
+            <h3 className={`text-lg font-semibold ${textColor}`}>My Skills</h3>
             <div className="flex flex-wrap gap-2 mt-3">
               {[
                 "Full Stack Development",
@@ -141,9 +154,11 @@ const Home = () => {
               ].map((skill, idx) => (
                 <span
                   key={idx}
-                  className="text-gray-800 border px-2 py-1 text-xs sm:text-sm 
-                    hover:text-white hover:bg-gray-800 
-                    transition-colors duration-300 ease-in-out inline-block rounded"
+                  className={`border px-2 py-1 text-xs sm:text-sm inline-block rounded transition-colors duration-300 ease-in-out 
+                    ${darkMode 
+                      ? "text-gray-300 border-gray-600 hover:text-black hover:bg-yellow-400"
+                      : "text-gray-800 border-gray-300 hover:text-white hover:bg-gray-800"
+                    }`}
                 >
                   {skill}
                 </span>
@@ -152,11 +167,13 @@ const Home = () => {
               {/* --- UPDATED LINK COMPONENT HERE --- */}
               <Link 
                 to="/skills" 
-                className="text-gray-800 border px-2 py-1 text-xs sm:text-sm inline-block rounded
-                    hover:text-white hover:bg-gray-800 
-                    transition-colors duration-300 ease-in-out"
+                className={`border px-2 py-1 text-xs sm:text-sm inline-block rounded transition-colors duration-300 ease-in-out
+                  ${darkMode 
+                      ? "text-gray-300 border-gray-600 hover:text-black hover:bg-yellow-400"
+                      : "text-gray-800 border-gray-300 hover:text-white hover:bg-gray-800"
+                    }`}
               >
-                Other..
+                More..
               </Link>
               {/* ------------------------------------ */}
             </div>
@@ -165,40 +182,40 @@ const Home = () => {
           {/* Most Recent Project */}
           <div>
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 gap-2">
-              <h3 className="text-lg font-semibold text-gray-900">
+              <h3 className={`text-lg font-semibold ${textColor}`}>
                 Most recent project
               </h3>
-              <Link to="/projects" className="text-teal-600 text-sm">
+              <Link to="/projects" className={`text-sm ${linkHover}`}>
                 See all projects
               </Link>
             </div>
 
             {/* First Project - Visible */}
-            <div className="p-3 sm:p-4 bg-gray-50 shadow rounded mb-4">
+            <div className={`p-3 sm:p-4 shadow rounded mb-4 ${cardBg}`}>
               <div className="flex items-start sm:items-center gap-3">
-                <FaProjectDiagram className="text-teal-600 text-lg sm:text-xl mt-0.5 sm:mt-0 flex-shrink-0" />
-                <p className="font-medium text-sm sm:text-base">AI Chatbot With Next & TypeScript</p>
+                <FaProjectDiagram className={`text-lg sm:text-xl mt-0.5 sm:mt-0 flex-shrink-0 ${darkMode ? 'text-yellow-400' : 'text-teal-600'}`} />
+                <p className={`font-medium text-sm sm:text-base ${textColor}`}>AI Chatbot With Next & TypeScript</p>
               </div>
-              <p className="text-gray-700 mt-2 text-xs sm:text-sm">
+              <p className={`${textSecondary} mt-2 text-xs sm:text-sm`}>
                 Interactive AI ChatBot using Next.js & TypeScript, allowing users to ask questions and get instant responses with a clean, professional interface.
               </p>
               <a 
                 href="https://chat-bot-by-huzaifa313-vbzi.vercel.app/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-xs sm:text-sm mt-2 underline inline-block"
+                className={`text-xs sm:text-sm mt-2 underline inline-block ${linkHover}`}
               >
                 View
               </a>
             </div>
 
             {/* Second Project - Blurred */}
-            <div className="p-3 sm:p-4 bg-gray-100 shadow rounded relative opacity-60 blur-[1px] pointer-events-none">
+            <div className={`p-3 sm:p-4 shadow rounded relative opacity-60 blur-[1px] pointer-events-none ${darkMode ? 'bg-gray-700' : 'bg-gray-100'}`}>
               <div className="flex items-start sm:items-center gap-3">
-                <FaProjectDiagram className="text-gray-500 text-lg sm:text-xl mt-0.5 sm:mt-0 flex-shrink-0" />
-                <p className="font-medium text-gray-500 text-sm sm:text-base">See All Projects</p>
+                <FaProjectDiagram className={`${textSecondary} text-lg sm:text-xl mt-0.5 sm:mt-0 flex-shrink-0`} />
+                <p className={`font-medium ${textSecondary} text-sm sm:text-base`}>See All Projects</p>
               </div>
-              <p className="text-gray-500 mt-2 text-xs sm:text-sm">
+              <p className={`${textSecondary} mt-2 text-xs sm:text-sm`}>
                 This project is locked. View all projects to explore.
               </p>
             </div>
@@ -207,7 +224,7 @@ const Home = () => {
       </div>
 
       {/* Footer */}
-      <footer className="text-center text-gray-500 py-4 md:py-6 text-xs sm:text-sm border-t px-4">
+      <footer className={`text-center py-4 md:py-6 text-xs sm:text-sm border-t px-4 ${darkMode ? 'text-gray-500 border-gray-700' : 'text-gray-500 border-gray-200'}`}>
         © 2025 Ali Huzaifa. All Rights Reserved.
       </footer>
     </div>

@@ -35,29 +35,35 @@ const Project = () => {
     const [modalImage, setModalImage] = useState(null); // <-- modal state
 
     const projects = [
-        {
-            id: 1,
-            title: "Chatbot Application",
-            description: "Interactive AI ChatBot using Next.js & TypeScript...",
-            fullDescription: "This advanced chatbot application uses modern AI technologies, powered by the Gemini API, to provide real-time, context-aware conversational responses. Built with Next.js and TypeScript, it ensures high performance and type safety, delivering a professional and fluid user experience.",
-            technologies: ["Next JS", "Typescript", "Gemini Api", "Tailwind CSS", "MUI"],
+         {
+            id: 3,
+            title: "FitTracker | Next & Mern Stack Project",
+            description: "Fitness | Gym website Subscription Added and also calculating user's bmi ",
+            fullDescription: "FitTrack is a modern, responsive web application designed for gym enthusiasts and fitness centers. Built using Next.js for the frontend and MongoDB, Express, Node.js (MERN) for the backend, it allows users to track workouts, view fitness plans, and manage their gym profiles seamlessly.",
+            technologies: ["Next JS", "Tailwind CSS", "MUI", "Mango Db"],
             images: [
-                "/Images/Chat.png",
-                "/Images/Chat2.png",
+                "/Images/GMain.png",
+                "/Images/GF.png",
+                "/Images/Plan.png",
+                "/Images/GFO.png",
             ],
-            githubLink: "https://github.com/Hasnainzx1/chatBotByHuzaifa313",
-            liveDemoLink: "https://chat-bot-by-huzaifa313-vbzi.vercel.app/",
+            githubLink: "https://github.com/Hasnainzx1/FitTrack",
+            liveDemoLink: "https://fittrackgymwebsite.netlify.app/",
             features: [
-                "Real-time AI-powered chat responses",
-                "Multi-language support for global users",
-                "Context-aware conversation using Gemini API",
-                "Sentiment analysis for understanding user mood",
-                "User authentication and session management",
-                "Rich message formatting (text, links, images)",
-                "Typing indicators and chat history",
-                "Scalable architecture with Next.js & TypeScript"
+                "Personalized dashboard to view workouts and track fitness progress",
+                "BMI calculator for quick health assessment",
+                "Predefined workout plans and schedules tailored to different goals",
+                "Search and filter exercises or workout programs",
+                "Responsive design for web and mobile devices",
+                "Full-stack architecture with Next.js, Node.js, MongoDB, and Tailwind CSS",
+                "Admin panel to manage workouts and fitness content",
+                "Real-time updates for new workout plans and notifications",
+                "Optimized performance and deployment on Netlify"
             ]
+
+
         },
+      
         {
             id: 2,
             title: "Full Stack Job Finder Application",
@@ -86,6 +92,29 @@ const Project = () => {
             ]
 
         },
+         {
+            id: 1,
+            title: "Chatbot Application",
+            description: "Interactive AI ChatBot using Next.js & TypeScript...",
+            fullDescription: "This advanced chatbot application uses modern AI technologies, powered by the Gemini API, to provide real-time, context-aware conversational responses. Built with Next.js and TypeScript, it ensures high performance and type safety, delivering a professional and fluid user experience.",
+            technologies: ["Next JS", "Typescript", "Gemini Api", "Tailwind CSS", "MUI"],
+            images: [
+                "/Images/Chat.png",
+                "/Images/Chat2.png",
+            ],
+            githubLink: "https://github.com/Hasnainzx1/chatBotByHuzaifa313",
+            liveDemoLink: "https://chat-bot-by-huzaifa313-vbzi.vercel.app/",
+            features: [
+                "Real-time AI-powered chat responses",
+                "Multi-language support for global users",
+                "Context-aware conversation using Gemini API",
+                "Sentiment analysis for understanding user mood",
+                "User authentication and session management",
+                "Rich message formatting (text, links, images)",
+                "Typing indicators and chat history",
+                "Scalable architecture with Next.js & TypeScript"
+            ]
+        },
     ];
 
     const openProjectDetail = (project) => setSelectedProject(project);
@@ -99,15 +128,15 @@ const Project = () => {
             <div className="p-4 sm:p-8 bg-gray-50 min-h-screen">
                 {/* --- Horizontal Loading Bar --- */}
                 {isActivelyLoading && (
-                    <div 
-                    style={{ width: `${loadingProgress}%` }} 
-                    className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out shadow-lg shadow-black/50" 
+                    <div
+                        style={{ width: `${loadingProgress}%` }}
+                        className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out shadow-lg shadow-black/50"
                     />
                 )}
                 {loadingProgress === 100 && (
-                    <div 
-                    style={{ width: '100%' }} 
-                    className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out opacity-0" 
+                    <div
+                        style={{ width: '100%' }}
+                        className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out opacity-0"
                     />
                 )}
                 {/* ------------------------------- */}
@@ -227,15 +256,15 @@ const Project = () => {
         <div className="p-4 sm:p-8 bg-gray-50 min-h-screen">
             {/* --- Horizontal Loading Bar --- */}
             {isActivelyLoading && (
-                <div 
-                    style={{ width: `${loadingProgress}%` }} 
-                    className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out shadow-lg shadow-black/50" 
+                <div
+                    style={{ width: `${loadingProgress}%` }}
+                    className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out shadow-lg shadow-black/50"
                 />
             )}
             {loadingProgress === 100 && (
-                <div 
-                    style={{ width: '100%' }} 
-                    className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out opacity-0" 
+                <div
+                    style={{ width: '100%' }}
+                    className="fixed top-0 left-0 h-1 bg-black z-50 transition-all duration-300 ease-in-out opacity-0"
                 />
             )}
             {/* ------------------------------- */}
